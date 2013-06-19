@@ -10,7 +10,7 @@ module Modularity
     
     module ClassMethods
       def does(trait_name, *args)
-        trait_name = "#{Modularity::Inflector.camelize(trait_name.to_s)}Trait"
+	      trait_name = "#{self.name}Traits::#{Modularity::Inflector.camelize(trait_name.to_s)}Trait"
         trait = Modularity::Inflector.constantize(trait_name)
         macro = trait.instance_variable_get("@trait_macro") or raise "Missing trait directive in #{trait_name}"
         class_exec(*args, &macro)
